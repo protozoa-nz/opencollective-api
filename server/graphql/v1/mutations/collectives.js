@@ -512,7 +512,7 @@ export async function approveCollective(remoteUser, CollectiveId) {
   return collective.update({ isActive: true });
 }
 
-export function deleteEvent(_, args, req) {
+export function deleteEventCollective(_, args, req) {
   if (!req.remoteUser) {
     throw new errors.Unauthorized({
       message: 'You need to be logged in to delete a collective',

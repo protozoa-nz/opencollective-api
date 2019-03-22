@@ -3,7 +3,7 @@ import {
   claimCollective,
   createCollective,
   editCollective,
-  deleteEvent,
+  deleteEventCollective,
   deleteCollective,
   deleteUserCollective,
   approveCollective,
@@ -101,13 +101,13 @@ const mutations = {
       return editCollective(_, args, req);
     },
   },
-  deleteEvent: {
+  deleteEventCollective: {
     type: CollectiveInterfaceType,
     args: {
       id: { type: new GraphQLNonNull(GraphQLInt) },
     },
     resolve(_, args, req) {
-      return deleteEvent(_, args, req);
+      return deleteEventCollective(_, args, req);
     },
   },
   deleteCollective: {
