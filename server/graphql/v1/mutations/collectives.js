@@ -814,7 +814,8 @@ export async function deleteCollective(_, args, req) {
       );
     })
     .then(() => debugDelete('deleteCollectiveConnectedAccounts'))
-    .then(() => collective.destroy());
+    .then(() => collective.destroy())
+    .then(() => collective);
 }
 
 export async function deleteUserCollective(_, args, req) {
@@ -825,7 +826,7 @@ export async function deleteUserCollective(_, args, req) {
   }
   const user = await models.User.findOne({ where: { id: req.remoteUser.id } });
   const userCollective = await models.Collective.findOne({
-    where: { id: user.CollectiveId },
+    where: { id: args.id },
   });
   const transactionCount = await models.Transaction.count({
     where: { FromCollectiveId: userCollective.id },
@@ -902,5 +903,6 @@ export async function deleteUserCollective(_, args, req) {
     .then(() => debugDelete('deleteUserCollective'))
     .then(() => {
       return user.destroy();
-    });
+    })
+    .then(() => userCollective);
 }
